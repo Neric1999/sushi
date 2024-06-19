@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sushi/views/splash.screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/views/screens/tabs.screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             primaryColor: const Color(0xFFFF6838),
             textTheme: GoogleFonts.robotoTextTheme(),
           ),
-          home: const SplashScreen(),
+          home: const TabsScreen(),
         );
       },
     );

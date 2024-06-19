@@ -15,6 +15,122 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String selectedCategory = 'Burger';
 
+  final Map<String, List<Map<String, String>>> foodItems = {
+    'Burger': [
+      {
+        'imagePath': 'assets/images/image 26.png',
+        'title': 'Chillox Burger',
+        'subtitle': 'Burgers Fast Food',
+        'rating': '4.8',
+        'time': '10 min',
+      },
+      {
+        'imagePath': 'assets/images/image 26.png',
+        'title': 'Chillox Burger',
+        'subtitle': 'Burgers Fast Food',
+        'rating': '4.8',
+        'time': '10 min',
+      },
+      {
+        'imagePath': 'assets/images/deliciou.jpeg',
+        'title': 'Delicious Pizza',
+        'subtitle': 'Pizza Fast Food',
+        'rating': '4.7',
+        'time': '15 min',
+      },
+      {
+        'imagePath': 'assets/images/hot.png',
+        'title': 'Hot Pizza',
+        'subtitle': 'Pizza Fast Food',
+        'rating': '4.6',
+        'time': '12 min',
+      },
+    ],
+    'Pizza': [
+      {
+        'imagePath': 'assets/images/p1.jpg',
+        'title': 'Delicious Pizza',
+        'subtitle': 'Pizza Fast Food',
+        'rating': '4.7',
+        'time': '15 min',
+      },
+      {
+        'imagePath': 'assets/images/p3.jpg',
+        'title': 'Hot Pizza',
+        'subtitle': 'Pizza Fast Food',
+        'rating': '4.6',
+        'time': '12 min',
+      },
+      {
+        'imagePath': 'assets/images/p4.jpeg',
+        'title': 'Hot Pizza',
+        'subtitle': 'Pizza Fast Food',
+        'rating': '4.6',
+        'time': '12 min',
+      },
+    ],
+    'Salad': [
+      {
+        'imagePath': 'assets/images/s1.jpg',
+        'title': 'Caesar Salad',
+        'subtitle': 'Healthy Food',
+        'rating': '4.9',
+        'time': '8 min',
+      },
+      {
+        'imagePath': 'assets/images/s2.jpg',
+        'title': 'Greek Salad',
+        'subtitle': 'Healthy Food',
+        'rating': '4.7',
+        'time': '9 min',
+      },
+      {
+        'imagePath': 'assets/images/s3.jpeg',
+        'title': 'Greek Salad',
+        'subtitle': 'Healthy Food',
+        'rating': '4.7',
+        'time': '9 min',
+      },
+      {
+        'imagePath': 'assets/images/s4.jpg',
+        'title': 'Greek Salad',
+        'subtitle': 'Healthy Food',
+        'rating': '4.7',
+        'time': '9 min',
+      },
+    ],
+    'Pork': [
+      {
+        'imagePath': 'assets/images/pork1.jpg',
+        'title': 'BBQ Pork Ribs',
+        'subtitle': 'Grilled Food',
+        'rating': '4.8',
+        'time': '20 min',
+      },
+      {
+        'imagePath': 'assets/images/pork2.jpg',
+        'title': 'Roast Pork',
+        'subtitle': 'Grilled Food',
+        'rating': '4.7',
+        'time': '18 min',
+      },
+      {
+        'imagePath': 'assets/images/pork4.jpg',
+        'title': 'Roast Pork',
+        'subtitle': 'Grilled Food',
+        'rating': '4.7',
+        'time': '18 min',
+      },
+      {
+        'imagePath': 'assets/images/pork3.jpg',
+        'title': 'Roast Pork',
+        'subtitle': 'Grilled Food',
+        'rating': '4.7',
+        'time': '18 min',
+      },
+    ],
+  };
+
   void selectCategory(String category) {
     setState(() {
       selectedCategory = category;
@@ -82,8 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(width: 20),
                       CategoryButton(
-                        imagePath:
-                            'assets/images/chicken-meat-buffalo-wing-raw-foodism-chicken-b41999528445be3ef377613e6e7186a9.png',
+                        imagePath: 'assets/images/capocollo.jpg',
                         text: 'Pork',
                         isSelected: selectedCategory == 'Pork',
                         onTap: () => selectCategory('Pork'),
@@ -93,36 +208,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 64),
-              const FoodCard(
-                imagePath: 'assets/images/image 26.png',
-                title: 'Chillox Burger',
-                subtitle: 'Burgers Fast Food',
-                rating: 4.8,
-                time: '10 min',
-              ),
-              const SizedBox(height: 20),
-              const FoodCard(
-                imagePath: 'assets/images/image 26.png',
-                title: 'Chillox Burger',
-                subtitle: 'Burgers Fast Food',
-                rating: 4.8,
-                time: '10 min',
-              ),
-              const SizedBox(height: 20),
-              const FoodCard(
-                imagePath: 'assets/images/deliciou.jpeg',
-                title: 'Chillox Burger',
-                subtitle: 'Burgers Fast Food',
-                rating: 4.8,
-                time: '10 min',
-              ),
-              const SizedBox(height: 20),
-              const FoodCard(
-                imagePath: 'assets/images/hot.png',
-                title: 'Chillox Burger',
-                subtitle: 'Burgers Fast Food',
-                rating: 4.8,
-                time: '10 min',
+              Column(
+                children: foodItems[selectedCategory]!.map((foodItem) {
+                  return Column(
+                    children: [
+                      FoodCard(
+                        imagePath: foodItem['imagePath']!,
+                        title: foodItem['title']!,
+                        subtitle: foodItem['subtitle']!,
+                        rating: double.parse(foodItem['rating']!),
+                        time: foodItem['time']!,
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  );
+                }).toList(),
               ),
             ],
           ),
