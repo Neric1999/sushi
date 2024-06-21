@@ -1,15 +1,22 @@
 // Category button widget
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CategoryButton extends StatelessWidget {
-  final String imagePath;
+  String? imagePath;
   final String text;
   final bool isSelected;
   final VoidCallback onTap;
+  final double? width;
+  final double? height;
+  final double? fntSize;
 
-  const CategoryButton({
-    required this.imagePath,
+  CategoryButton({
+    this.imagePath,
     required this.text,
+    this.width,
+    this.fntSize,
+    this.height,
     required this.isSelected,
     required this.onTap,
     super.key,
@@ -21,8 +28,8 @@ class CategoryButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(19),
       child: Container(
-        height: 56,
-        width: 102,
+        height: height ?? 56,
+        width: width ?? 102,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(19),
@@ -33,24 +40,26 @@ class CategoryButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 27,
-              height: 27,
+              width: imagePath != null ? 27 : 0,
+              height: imagePath != null ? 27 : 0,
               margin: const EdgeInsets.only(left: 9),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(11),
               ),
-              child: Image.asset(
-                imagePath,
-                width: 18,
-              ),
+              child: imagePath != null
+                  ? Image.asset(
+                      imagePath!,
+                      width: 18,
+                    )
+                  : Text(''),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 4),
             Text(
               text,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: fntSize ?? 14,
                 color: isSelected ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w800,
               ),

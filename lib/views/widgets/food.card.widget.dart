@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sushi/views/screens/single.meal.screen.dart';
 
 class FoodCard extends StatelessWidget {
   final String imagePath;
@@ -21,7 +22,12 @@ class FoodCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (ctx) => SingleMeal(image: imagePath)));
+        },
         child: Material(
           elevation: 5,
           color: Colors.white,
