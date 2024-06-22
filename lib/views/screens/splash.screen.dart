@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                       width: 320.w,
                       radius: 20,
