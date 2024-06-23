@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sushi/views/screens/home.screen.dart';
+import 'package:sushi/views/screens/tabs.screen.dart';
 import 'package:sushi/views/widgets/button.widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
+                                builder: (context) => const TabsScreen()));
                       },
                       width: 320.w,
                       radius: 20,
