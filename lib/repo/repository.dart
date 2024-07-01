@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/domain/models/user.dart';
 
 class Repository {
@@ -43,6 +44,21 @@ class Repository {
       }
     } catch (e) {
       throw Exception('Error on signing in user is $e');
+    }
+  }
+
+  Future<Brand?> getBrands() async {
+    String url = 'http://localhost:8080/brand';
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final brandJson = jsonDecode(response.body);
+        return Brand.fromJson(brandJson);
+      } else {
+        throw Exception('Error while getting brands ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Error on getting brands $e');
     }
   }
 }
