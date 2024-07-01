@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:indexed/indexed.dart';
 
-class CounterWidget extends StatelessWidget {
+class CounterWidget extends ConsumerStatefulWidget {
   const CounterWidget({super.key});
 
+  @override
+  ConsumerState<CounterWidget> createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends ConsumerState<CounterWidget> {
   @override
   Widget build(BuildContext context) {
     return Indexer(
@@ -28,9 +34,14 @@ class CounterWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.remove,
-                      size: 25,
+                    GestureDetector(
+                      onTap: () {
+                        print('Removed');
+                      },
+                      child: const Icon(
+                        Icons.remove,
+                        size: 25,
+                      ),
                     ),
                     const SizedBox(
                       width: 17,
@@ -54,10 +65,15 @@ class CounterWidget extends StatelessWidget {
                     const SizedBox(
                       width: 12,
                     ),
-                    const Icon(
-                      Icons.add,
-                      size: 25,
-                      color: Color(0xFFFF6838),
+                    GestureDetector(
+                      onTap: () {
+                        print('Added');
+                      },
+                      child: const Icon(
+                        Icons.add,
+                        size: 25,
+                        color: Color(0xFFFF6838),
+                      ),
                     ),
                   ],
                 ),

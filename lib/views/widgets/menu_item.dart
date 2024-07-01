@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/domain/models/meal.model.dart';
+import 'package:sushi/repo/provider/cart.items.provider.dart';
 import 'package:sushi/views/widgets/meal.detail.widget.dart';
 
-class MenuItem extends StatelessWidget {
+class MenuItem extends ConsumerWidget {
   final String image;
   final String title;
   final String subtitle;
@@ -17,7 +20,7 @@ class MenuItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -100,7 +103,14 @@ class MenuItem extends StatelessWidget {
                         ),
                         IconButton(
                           icon: const Icon(Icons.add),
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(cartProvider.notifier).addItem(MealModel(
+                                  img: image,
+                                  title: title,
+                                  subtitle: subtitle,
+                                  price: price,
+                                ));
+                          },
                         ),
                       ],
                     ),

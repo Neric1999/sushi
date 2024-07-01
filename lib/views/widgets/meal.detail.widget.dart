@@ -19,8 +19,6 @@ class MealDetails extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          ImageContainer(img: img),
-          const CounterWidget(),
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -186,6 +184,10 @@ class MealDetails extends StatelessWidget {
               ),
             ),
           ),
+          ImageContainer(img: img),
+
+          const CounterWidget(),
+
           Positioned(
             bottom: 40,
             left: 40,

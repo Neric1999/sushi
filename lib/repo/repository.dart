@@ -30,6 +30,7 @@ class Repository {
         'username': username,
         'password': password,
       };
+      print('In sushi, signing user with $username and $password');
       String bodyJson = jsonEncode(body);
       http.Response response =
           await http.post(Uri.parse(url), body: bodyJson, headers: headers);

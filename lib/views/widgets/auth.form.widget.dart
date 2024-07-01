@@ -54,7 +54,7 @@ class _AuthFormState extends State<AuthForm> {
     });
     try {
       String token = await _repository.signIn(
-        _emailController.text,
+        _usernameController.text, // Use username instead of email
         _passwordController.text,
       );
       print('Sign in successful. Token: $token');
