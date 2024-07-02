@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/views/widgets/category.button.widget.dart';
 import 'package:sushi/views/widgets/counter.widget.dart';
 import 'package:sushi/views/widgets/image.container.widget.dart';
@@ -10,8 +11,12 @@ class MealDetails extends StatelessWidget {
   const MealDetails({
     super.key,
     required this.img,
+    required this.ingredients,
+    required this.description,
   });
   final String img;
+  final List<Ingredient> ingredients;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -122,35 +127,18 @@ class MealDetails extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const SingleChildScrollView(
+                  SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: [
-                        IngredientCard(
-                          imagePath: 'assets/images/Group.png',
-                          text: 'Beef',
-                        ),
-                        SizedBox(width: 20),
-                        IngredientCard(
-                          imagePath: 'assets/images/lettuce 1.png',
-                          text: 'Lettuce',
-                        ),
-                        SizedBox(width: 20),
-                        IngredientCard(
-                          imagePath: 'assets/images/olive-oil 1.png',
-                          text: 'Olive Oil',
-                        ),
-                        SizedBox(width: 20),
-                        IngredientCard(
-                          imagePath: 'assets/images/🥚.png',
-                          text: 'Egg',
-                        ),
-                        SizedBox(width: 20),
-                        IngredientCard(
-                          imagePath: 'assets/images/tomato.png',
-                          text: 'Tomato',
-                        ),
-                      ],
+                      children: ingredients
+                          .map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: IngredientCard(
+                                  imagePath: e.image, text: e.name),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -167,11 +155,11 @@ class MealDetails extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const SizedBox(
+                  SizedBox(
                     width: 380,
                     child: Text(
-                      'This special beef burger uses special quality beef with sliced tomatoes, cucumbers, vegetables, lettuce leaf, olive oil and more.',
-                      style: TextStyle(
+                      description,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),

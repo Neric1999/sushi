@@ -47,13 +47,13 @@ class Repository {
     }
   }
 
-  Future<Brand?> getBrands() async {
+  Future<List<Brand>?> getBrands() async {
     String url = 'http://localhost:8080/brand';
     try {
       http.Response response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        final brandJson = jsonDecode(response.body);
-        return Brand.fromJson(brandJson);
+        List<dynamic> brandJson = jsonDecode(response.body);
+        return brandJson.map((json) => Brand.fromJson(json)).toList();
       } else {
         throw Exception('Error while getting brands ${response.body}');
       }

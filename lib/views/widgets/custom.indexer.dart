@@ -4,7 +4,13 @@ import 'package:indexed/indexed.dart';
 import 'package:sushi/views/widgets/category.button.widget.dart';
 
 class CustomIndexer extends StatelessWidget {
-  const CustomIndexer({super.key});
+  const CustomIndexer({
+    super.key,
+    required this.brand,
+    required this.name,
+  });
+  final String brand;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class CustomIndexer extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Chillox Burger',
+                      name,
                       style: GoogleFonts.playfairDisplay(
                         textStyle: const TextStyle(
                           fontSize: 32,
@@ -90,7 +96,7 @@ class CustomIndexer extends StatelessWidget {
               borderRadius: BorderRadius.circular(55),
             ),
             child: Image.asset(
-              'assets/images/image 8.png',
+              'assets/images/$brand',
 
               width: 107, // Ensure the image fits the container properly
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sushi/views/screens/cart.screen.dart';
 import 'package:sushi/views/screens/home.screen.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _TabsScreenState extends State<TabsScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     Text('Tab 2'),
-    Text('Tab 3'),
+    CartScreen(),
     Text('Tab 4'),
   ];
 

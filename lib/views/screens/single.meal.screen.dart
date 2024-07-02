@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi/domain/models/meal.model.dart';
+import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/repo/provider/cart.items.provider.dart';
-import 'package:sushi/views/widgets/button_row.dart';
 import 'package:sushi/views/widgets/custom.indexer.dart';
 import 'package:sushi/views/widgets/menu_item.dart';
 
 class SingleMeal extends ConsumerStatefulWidget {
-  const SingleMeal({super.key, required this.image});
-
+  const SingleMeal({
+    super.key,
+    required this.image,
+    required this.brand,
+    required this.brandImg,
+  });
+  final String brandImg;
+  final Brand brand;
   final String image;
 
   @override
@@ -29,8 +34,10 @@ class _SingleMealState extends ConsumerState<SingleMeal> {
             height: 293,
             width: double.infinity,
             decoration: const BoxDecoration(),
-            child: Image.asset(
-              widget.image,
+            child: Image(
+              image: NetworkImage(
+                widget.image,
+              ),
               fit: BoxFit.cover,
             ),
           ),
@@ -102,7 +109,10 @@ class _SingleMealState extends ConsumerState<SingleMeal> {
               ],
             ),
           ),
-          const CustomIndexer(),
+          CustomIndexer(
+            brand: widget.brandImg,
+            name: widget.brand.name,
+          ),
           Positioned(
             top: 408,
             child: Column(
@@ -121,21 +131,12 @@ class _SingleMealState extends ConsumerState<SingleMeal> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child: ButtonRow(
-                    onButtonSelected: (buttonText) {
-                      // Handle button selection
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height - 468,
+                  height: MediaQuery.of(context).size.height - 448,
                   width: MediaQuery.of(context).size.width,
                   child: GridView.builder(
                     padding: const EdgeInsets.all(20),
-                    itemCount: 4,
+                    itemCount: widget.brand.items.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -144,39 +145,16 @@ class _SingleMealState extends ConsumerState<SingleMeal> {
                       childAspectRatio: 0.7,
                     ),
                     itemBuilder: (context, index) {
-                      const List<MealModel> menuItems = [
-                        MealModel(
-                          img: 'assets/images/image-removebg-preview (4).png',
-                          title: 'Chicken Burger',
-                          subtitle: 'Chicken Patty and special sauce',
-                          price: 4.99,
-                        ),
-                        MealModel(
-                          img: 'assets/images/image-removebg-preview (5).png',
-                          title: 'Beef Burger',
-                          subtitle: 'Beef Patty and special sauce',
-                          price: 7.99,
-                        ),
-                        MealModel(
-                          img: 'assets/images/fries.png',
-                          title: 'French Fry',
-                          subtitle: 'Crispy and golden',
-                          price: 2.99,
-                        ),
-                        MealModel(
-                          img: 'assets/images/file (1).png',
-                          title: 'Chicken Drumsticks',
-                          subtitle: 'Juicy and tender',
-                          price: 5.99,
-                        ),
-                      ];
+                      final menuItems = widget.brand.items;
 
                       var item = menuItems[index];
 
                       return MenuItem(
-                        image: item.img,
-                        title: item.title,
-                        subtitle: item.subtitle,
+                        image: item.image,
+                        title: item.name,
+                        item: item,
+                        ingredients: item.ingredients,
+                        subtitle: item.description ?? '',
                         price: item.price,
                       );
                     },

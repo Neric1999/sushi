@@ -3,8 +3,8 @@ import 'package:sushi/locator.dart';
 import 'package:sushi/repo/repository.dart';
 
 class DomainController {
-  Future<Brand?> getBrands() async {
-    final brand = await locator.get<Repository>().getBrands();
-    return brand;
+  Future<List<Brand>?> getBrands() async {
+    final brands = await locator.get<Repository>().getBrands();
+    return brands;
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/domain/models/user.dart';
+import 'package:sushi/repo/provider/brands.provider.dart';
 import 'package:sushi/repo/repository.dart';
 import 'package:sushi/views/screens/tabs.screen.dart';
 
-class AuthForm extends StatefulWidget {
+class AuthForm extends ConsumerStatefulWidget {
   final bool isSignUp;
 
   const AuthForm({required this.isSignUp, super.key});
 
   @override
-  State<AuthForm> createState() => _AuthFormState();
+  ConsumerState<AuthForm> createState() => _AuthFormState();
 }
 
-class _AuthFormState extends State<AuthForm> {
+class _AuthFormState extends ConsumerState<AuthForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,10 +34,16 @@ class _AuthFormState extends State<AuthForm> {
       );
       String token = await _repository.signUp(user);
       print('Sign up successful. Token: $token');
+
+      List<Brand>? brands = await _repository.getBrands();
+      print('Fetched brands: $brands');
+
+      ref.read(brandProvider.notifier).setBrands(brands ?? []);
+
       if (!mounted) return;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const TabsScreen()),
+        MaterialPageRoute(builder: (context) => TabsScreen()),
       );
     } catch (e) {
       print('Error during sign up: $e');
@@ -54,14 +63,20 @@ class _AuthFormState extends State<AuthForm> {
     });
     try {
       String token = await _repository.signIn(
-        _usernameController.text, // Use username instead of email
+        _usernameController.text,
         _passwordController.text,
       );
       print('Sign in successful. Token: $token');
+
+      List<Brand>? brands = await _repository.getBrands();
+      print('Fetched brands: $brands');
+
+      ref.read(brandProvider.notifier).setBrands(brands ?? []);
+
       if (!mounted) return;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const TabsScreen()),
+        MaterialPageRoute(builder: (context) => TabsScreen()),
       );
     } catch (e) {
       print('Error during sign in: $e');

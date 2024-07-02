@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sushi/repo/data/dummy.data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sushi/repo/provider/brands.provider.dart';
 import 'package:sushi/views/widgets/category.button.widget.dart';
 import 'package:sushi/views/widgets/center.text.widget.dart';
-import 'package:sushi/views/widgets/food.card.widget.dart';
+import 'package:sushi/views/widgets/brand.card.widget.dart';
 import 'package:sushi/views/widgets/header.widget.dart';
 import 'package:sushi/views/widgets/search.bar.widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   String selectedCategory = 'Burger';
 
   void selectCategory(String category) {
@@ -24,12 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final brands = ref.watch(brandProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: 60,
-        ),
+        padding: const EdgeInsets.only(top: 60),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -94,15 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 64),
               Column(
-                children: foodItems[selectedCategory]!.map((foodItem) {
+                children: brands
+                    .where((brand) => brand.name.contains(selectedCategory))
+                    .map((brand) {
                   return Column(
                     children: [
-                      FoodCard(
-                        imagePath: foodItem['imagePath']!,
-                        title: foodItem['title']!,
-                        subtitle: foodItem['subtitle']!,
-                        rating: double.parse(foodItem['rating']!),
-                        time: foodItem['time']!,
+                      BrandCard(
+                        brand: brand,
                       ),
                       const SizedBox(height: 20),
                     ],

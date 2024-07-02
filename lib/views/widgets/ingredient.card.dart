@@ -13,7 +13,7 @@ class IngredientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      // height: 80,
       width: 68,
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -23,9 +23,14 @@ class IngredientCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            imagePath,
-            width: 22,
+          // Image.asset(
+          //   imagePath,
+          //   width: 22,
+          // ),
+          Image(
+            image: NetworkImage(imagePath),
+            width: 40,
+            fit: BoxFit.cover,
           ),
           const SizedBox(height: 10),
           Text(

@@ -16,12 +16,10 @@ class ImageContainer extends StatelessWidget {
           bottom: Radius.circular(24),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 60),
-        child: Image.asset(
-          img,
-          fit: BoxFit.cover,
-        ),
+      child: Image(
+        image: NetworkImage(img),
+        fit: BoxFit.cover,
+        // height: 300,
       ),
     );
   }
