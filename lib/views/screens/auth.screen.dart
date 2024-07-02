@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sushi/views/widgets/auth.form.widget.dart';
 import 'package:sushi/views/widgets/wave.painter.dart';
+import 'package:sushi/views/screens/tabs.screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -11,6 +13,25 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool isSignUp = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _checkToken();
+  // }
+
+  Future<void> _checkToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+
+    if (token != null) {
+      // Navigate to the TabsScreen if token exists
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TabsScreen()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
