@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sushi/views/screens/cart.screen.dart';
 import 'package:sushi/views/screens/favorites.screen.dart';
 import 'package:sushi/views/screens/home.screen.dart';
+import 'package:sushi/views/screens/profile.screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -16,7 +17,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomeScreen(),
     FavoritesScreen(),
     CartScreen(),
-    Text('Tab 4'),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

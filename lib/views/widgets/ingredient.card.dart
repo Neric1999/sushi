@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IngredientCard extends StatelessWidget {
   final String imagePath;
@@ -12,35 +13,48 @@ class IngredientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: 80,
-      width: 68,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(19),
-        color: const Color.fromARGB(255, 250, 250, 250),
+    return Material(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.r),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Image.asset(
-          //   imagePath,
-          //   width: 22,
-          // ),
-          Image(
-            image: NetworkImage(imagePath),
-            width: 40,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+      elevation: 6,
+      shadowColor: const Color.fromARGB(255, 255, 47, 0),
+      child: Container(
+        alignment: Alignment.center,
+        height: 130,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          color: const Color.fromARGB(255, 250, 250, 250),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 60,
+              width: 65,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.r),
+              ),
+              child: Image(
+                image: NetworkImage(imagePath),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 80,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

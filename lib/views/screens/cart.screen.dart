@@ -38,75 +38,116 @@ class _CartScreenState extends ConsumerState<CartScreen> {
               final quantity = cartItems[item]!;
               final totalPrice = item.price * quantity;
 
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (ctx) => MealDetails(
-                        item: item,
-                        img: item.image,
-                        ingredients: item.ingredients,
-                        description: item.description ?? '',
-                      ),
-                    ),
-                  );
-                },
-                child: Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
+              return Card(
+                margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+                color: Colors.white,
+                elevation: 5,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => MealDetails(
+                                item: item,
+                                img: item.image,
+                                ingredients: item.ingredients,
+                                description: item.description ?? '',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 120.h,
+                          width: 120.w,
                           clipBehavior: Clip.hardEdge,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
                           ),
                           child: Image.network(item.image, fit: BoxFit.cover),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(width: 16.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.name,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            Container(
+                              height: 40.h,
+                              width: 120.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5.r),
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 0.3.w,
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                item.description ?? '',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: Color.fromARGB(255, 158, 155, 155),
+                                    ),
+                                  ),
+                                  Text(
+                                    quantity.toString(),
+                                    style: TextStyle(
+                                      fontSize: 24.sp,
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Color.fromARGB(255, 118, 115, 115),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Quantity: $quantity',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          '\$${totalPrice.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(width: 14.w),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '\$${totalPrice.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              color: const Color(0xFFFF6838),
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                          SizedBox(height: 40.h),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Image.asset(
+                              'assets/images/trash.png',
+                              width: 25.w,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               );
