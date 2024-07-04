@@ -1,7 +1,29 @@
+// top_bar.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sushi/domain/models/brand.model.dart';
+import 'package:sushi/repo/provider/liked.items.provider.dart';
 
-class TopBar extends StatelessWidget {
-  const TopBar({super.key});
+class TopBar extends ConsumerStatefulWidget {
+  const TopBar({
+    super.key,
+    required this.item,
+  });
+  final Item item;
+
+  @override
+  ConsumerState<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends ConsumerState<TopBar> {
+  bool _isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check initial liked status
+    _isLiked = ref.read(likedItemsProvider).contains(widget.item);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +52,15 @@ class TopBar extends StatelessWidget {
           ),
           const SizedBox(width: 244),
           InkWell(
-            // Ensure this is also an InkWell
             onTap: () {
-              // Your onTap action here
+              setState(() {
+                _isLiked = !_isLiked;
+              });
+              if (_isLiked) {
+                ref.read(likedItemsProvider.notifier).addItem(widget.item);
+              } else {
+                ref.read(likedItemsProvider.notifier).removeItem(widget.item);
+              }
             },
             child: Container(
               height: 55,
@@ -43,7 +71,9 @@ class TopBar extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Image.asset(
-                'assets/images/Heart.png',
+                _isLiked
+                    ? 'assets/images/heart (2).png'
+                    : 'assets/images/heart (3).png',
                 width: 24,
               ),
             ),

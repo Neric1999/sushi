@@ -47,7 +47,7 @@ class _AuthFormState extends ConsumerState<AuthForm> {
         if (!mounted) return;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => TabsScreen()),
+          MaterialPageRoute(builder: (context) => const TabsScreen()),
         );
       }
     } catch (e) {
@@ -87,7 +87,7 @@ class _AuthFormState extends ConsumerState<AuthForm> {
       if (!mounted) return;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TabsScreen()),
+        MaterialPageRoute(builder: (context) => const TabsScreen()),
       );
     } catch (e) {
       print('Error during sign up: $e');
@@ -122,7 +122,7 @@ class _AuthFormState extends ConsumerState<AuthForm> {
       if (!mounted) return;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TabsScreen()),
+        MaterialPageRoute(builder: (context) => const TabsScreen()),
       );
     } catch (e) {
       print('Error during sign in: $e');
@@ -139,7 +139,7 @@ class _AuthFormState extends ConsumerState<AuthForm> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : Column(
             children: [
               if (widget.isSignUp)

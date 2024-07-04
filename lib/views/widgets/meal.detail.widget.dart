@@ -10,11 +10,13 @@ import 'package:sushi/views/widgets/top.bar.widget.dart';
 class MealDetails extends StatelessWidget {
   const MealDetails({
     super.key,
+    required this.item,
     required this.img,
     required this.ingredients,
     required this.description,
   });
   final String img;
+  final Item item;
   final List<Ingredient> ingredients;
   final String description;
 
@@ -31,24 +33,33 @@ class MealDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                      height: 400), // Adjusted to make space for the image
+                    height: 400,
+                  ), // Adjusted to make space for the image
                   Row(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Beef Burger",
-                            style: GoogleFonts.playfairDisplay(
-                              fontSize: 34,
-                              fontWeight: FontWeight.w900,
+                          SizedBox(
+                            width: 270,
+                            child: Text(
+                              item.name,
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.playfairDisplay(
+                                fontSize: 34,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
                           ),
-                          const Text(
-                            'Beef Patty and special sauce',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                          SizedBox(
+                            width: 250,
+                            child: Text(
+                              item.description ?? '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ],
@@ -66,9 +77,9 @@ class MealDetails extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 5),
-                      const Text(
-                        '7.99',
-                        style: TextStyle(
+                      Text(
+                        item.price.toString(),
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w900,
                         ),
@@ -103,7 +114,7 @@ class MealDetails extends StatelessWidget {
                         const SizedBox(width: 24),
                         CategoryButton(
                           imagePath: 'assets/images/Vector (4).png',
-                          text: '4.8',
+                          text: item.reviews.toString(),
                           isSelected: false,
                           width: 100,
                           fntSize: 12,
@@ -174,30 +185,34 @@ class MealDetails extends StatelessWidget {
           ),
           ImageContainer(img: img),
 
-          const CounterWidget(),
-
-          Positioned(
-            bottom: 40,
-            left: 40,
-            height: 70,
-            width: 354,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: const Color(0xFFFF6838),
-              ),
-              child: const Text(
-                r'Add to Cart ($15.98)',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+          CounterWidget(
+            item: item,
           ),
-          const TopBar(), // Ensure TopBar is added last in the Stack
+
+          // Positioned(
+          //   bottom: 40,
+          //   left: 40,
+          //   height: 70,
+          //   width: 354,
+          //   child: Container(
+          //     alignment: Alignment.center,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(25),
+          //       color: const Color(0xFFFF6838),
+          //     ),
+          //     child: const Text(
+          //       r'Add to Cart ($15.98)',
+          //       style: TextStyle(
+          //         fontSize: 20,
+          //         fontWeight: FontWeight.w900,
+          //         color: Colors.white,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          TopBar(
+            item: item,
+          ), // Ensure TopBar is added last in the Stack
         ],
       ),
     );

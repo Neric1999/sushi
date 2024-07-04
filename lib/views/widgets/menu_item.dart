@@ -31,6 +31,7 @@ class MenuItem extends ConsumerWidget {
           context,
           MaterialPageRoute(
             builder: (ctx) => MealDetails(
+              item: item,
               img: image,
               ingredients: ingredients,
               description: subtitle,
@@ -39,9 +40,7 @@ class MenuItem extends ConsumerWidget {
         );
       },
       child: Container(
-        // height: 430,
         alignment: Alignment.center,
-        // padding: EdgeInsets.only(bottom: 6),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: Colors.black,
@@ -63,13 +62,6 @@ class MenuItem extends ConsumerWidget {
               fit: BoxFit.cover,
               width: double.infinity,
             ),
-
-            // Image.asset(
-            //   image,
-            //   height: 120,
-            //   fit: BoxFit.cover,
-            //   width: double.infinity,
-            // ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

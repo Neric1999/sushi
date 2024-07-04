@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:indexed/indexed.dart';
+import 'package:sushi/domain/models/brand.model.dart';
+import 'package:sushi/repo/provider/cart.items.provider.dart';
 
 class CounterWidget extends ConsumerStatefulWidget {
-  const CounterWidget({super.key});
+  const CounterWidget({
+    super.key,
+    required this.item,
+  });
+  final Item item;
 
   @override
   ConsumerState<CounterWidget> createState() => _CounterWidgetState();
@@ -12,6 +18,11 @@ class CounterWidget extends ConsumerStatefulWidget {
 class _CounterWidgetState extends ConsumerState<CounterWidget> {
   @override
   Widget build(BuildContext context) {
+    final cartNotifier = ref.read(cartProvider.notifier);
+    final itemCount = ref.watch(cartProvider).containsKey(widget.item)
+        ? ref.watch(cartProvider)[widget.item]!
+        : 0;
+
     return Indexer(
       children: [
         Positioned(
@@ -36,7 +47,7 @@ class _CounterWidgetState extends ConsumerState<CounterWidget> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print('Removed');
+                        cartNotifier.removeItem(widget.item);
                       },
                       child: const Icon(
                         Icons.remove,
@@ -54,9 +65,9 @@ class _CounterWidgetState extends ConsumerState<CounterWidget> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: const Text(
-                        '2',
-                        style: TextStyle(
+                      child: Text(
+                        '$itemCount',
+                        style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
@@ -67,7 +78,7 @@ class _CounterWidgetState extends ConsumerState<CounterWidget> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        print('Added');
+                        cartNotifier.addItem(widget.item);
                       },
                       child: const Icon(
                         Icons.add,

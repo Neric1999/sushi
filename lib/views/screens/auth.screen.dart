@@ -26,9 +26,10 @@ class _AuthScreenState extends State<AuthScreen> {
 
     if (token != null) {
       // Navigate to the TabsScreen if token exists
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TabsScreen()),
+        MaterialPageRoute(builder: (context) => const TabsScreen()),
       );
     }
   }
