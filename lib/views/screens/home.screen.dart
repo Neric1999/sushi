@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/repo/provider/brands.provider.dart';
+import 'package:sushi/views/widgets/brand.card.widget.dart';
 import 'package:sushi/views/widgets/category.button.widget.dart';
 import 'package:sushi/views/widgets/center.text.widget.dart';
-import 'package:sushi/views/widgets/brand.card.widget.dart';
 import 'package:sushi/views/widgets/header.widget.dart';
 import 'package:sushi/views/widgets/search.bar.widget.dart';
 
@@ -26,6 +27,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final brands = ref.watch(brandProvider);
+    final searchTerm = ref.watch(searchProvider);
+
+    final filteredBrands = searchTerm.isEmpty
+        ? brands
+        : brands
+            .where((brand) =>
+                brand.name.toLowerCase().contains(searchTerm.toLowerCase()))
+            .toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,15 +50,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const SizedBox(height: 20),
               const SearchBarCustom(),
               const SizedBox(height: 20),
-              const Row(
+              Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Text(
                       'Categories',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
+                      style: GoogleFonts.playfairDisplay(
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
                   )
@@ -95,7 +106,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: 64),
               Column(
-                children: brands
+                children: filteredBrands
                     .where((brand) => brand.name.contains(selectedCategory))
                     .map((brand) {
                   return Column(

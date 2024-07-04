@@ -1,4 +1,3 @@
-// top_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sushi/domain/models/brand.model.dart';
@@ -16,17 +15,14 @@ class TopBar extends ConsumerStatefulWidget {
 }
 
 class _TopBarState extends ConsumerState<TopBar> {
-  bool _isLiked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Check initial liked status
-    _isLiked = ref.read(likedItemsProvider).contains(widget.item);
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Watch the liked items provider to get real-time updates
+    final likedItems = ref.watch(likedItemsProvider);
+    final isLiked =
+        likedItems.isNotEmpty && likedItems.any((i) => i.id == widget.item.id);
+    print('Items are $likedItems and $isLiked');
+
     return Positioned(
       top: 52,
       left: 30,
@@ -54,13 +50,8 @@ class _TopBarState extends ConsumerState<TopBar> {
           InkWell(
             onTap: () {
               setState(() {
-                _isLiked = !_isLiked;
+                ref.read(likedItemsProvider.notifier).toggleItem(widget.item);
               });
-              if (_isLiked) {
-                ref.read(likedItemsProvider.notifier).addItem(widget.item);
-              } else {
-                ref.read(likedItemsProvider.notifier).removeItem(widget.item);
-              }
             },
             child: Container(
               height: 55,
@@ -71,9 +62,9 @@ class _TopBarState extends ConsumerState<TopBar> {
                 color: Colors.white,
               ),
               child: Image.asset(
-                _isLiked
-                    ? 'assets/images/heart (2).png'
-                    : 'assets/images/heart (3).png',
+                isLiked
+                    ? 'assets/images/heart (3).png'
+                    : 'assets/images/heart (2).png',
                 width: 24,
               ),
             ),

@@ -1,20 +1,21 @@
-// liked_items_provider.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sushi/domain/models/brand.model.dart';
 
-class LikedItemsNotifier extends StateNotifier<Set<Item>> {
-  LikedItemsNotifier() : super({});
+class LikedItemsNotifier extends StateNotifier<List<Item>> {
+  LikedItemsNotifier() : super([]);
 
-  void addItem(Item item) {
-    state = {...state, item};
-  }
-
-  void removeItem(Item item) {
-    state = state.where((i) => i.id != item.id).toSet();
+  void toggleItem(Item item) {
+    if (state.any((i) => i.id == item.id)) {
+      // If item is in the list, remove it
+      state = state.where((i) => i.id != item.id).toList();
+    } else {
+      // If item is not in the list, add it
+      state = [...state, item];
+    }
   }
 }
 
 final likedItemsProvider =
-    StateNotifierProvider<LikedItemsNotifier, Set<Item>>((ref) {
+    StateNotifierProvider<LikedItemsNotifier, List<Item>>((ref) {
   return LikedItemsNotifier();
 });

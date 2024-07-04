@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sushi/views/screens/cart.screen.dart';
+import 'package:sushi/views/screens/favorites.screen.dart';
 import 'package:sushi/views/screens/home.screen.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _TabsScreenState extends State<TabsScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text('Tab 2'),
+    FavoritesScreen(),
     CartScreen(),
     Text('Tab 4'),
   ];
@@ -49,6 +50,7 @@ class _TabsScreenState extends State<TabsScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
