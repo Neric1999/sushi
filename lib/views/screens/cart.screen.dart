@@ -26,8 +26,25 @@ class _CartScreenState extends ConsumerState<CartScreen> {
           final cartItems = ref.watch(cartProvider);
 
           if (cartItems.isEmpty) {
-            return const Center(
-              child: Text('Your cart is empty'),
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'assets/images/shopping-cart.png',
+                    width: 300,
+                    color: const Color(0xFFFF6838),
+                  ),
+                  SizedBox(height: 16.h),
+                  const Text(
+                    'Your cart is empty start shopping now.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
             );
           }
 

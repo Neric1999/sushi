@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sushi/views/screens/tabs.screen.dart';
-import 'package:sushi/views/widgets/button.widget.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/views/screens/auth.screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,15 +12,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    super.initState();
-    // Timer(const Duration(seconds: 3), () {
-    //   Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: (context) => const LoginScreen()));
-    // });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // ignore: sized_box_for_whitespace
@@ -29,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Stack(
           children: [
             Image.asset(
-              "assets/images/chicken.jpg",
+              "assets/images/splash3.avif",
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -40,32 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   colors: [Colors.transparent, Color.fromARGB(137, 0, 0, 0)],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                ),
-              ),
-              child: Positioned(
-                top: 120,
-                right: 0,
-                left: 0,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 100,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/images/logo1.png',
-                        width: 80,
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    const Text(
-                      'Want do you want on dinner',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  ],
                 ),
               ),
             ),
@@ -89,33 +54,53 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 300,
                       child: Text(
-                        'Enjoy delicious meals right 😋now',
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                        'Enjoy delicious meals right 😋 now',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.playfairDisplay(
+                          textStyle: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.h),
-                    Button(
-                      txt: "Sign In",
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TabsScreen()));
-                      },
-                      width: 320.w,
-                      radius: 20,
-                      color: const Color(0xFFFF6838),
-                      fntColor: Colors.white,
-                      fntSize: 25.sp,
-                      fontWeight: FontWeight.w600,
-                      height: 55.h,
+                    SizedBox(height: 50.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          borderRadius: BorderRadius.circular(19.r),
+                          splashColor: Colors.black,
+                          enableFeedback: true,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => const AuthScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 65,
+                            width: 65,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(right: 30.w),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFF6838),
+                              borderRadius: BorderRadius.circular(19.r),
+                            ),
+                            child: Image.asset(
+                              'assets/images/tap (3).png',
+                              width: 40,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
                     )
                   ],
                 ),

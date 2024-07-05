@@ -46,34 +46,37 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: _buildIcon('assets/images/Discovery.png', 0),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon('assets/images/Star.png', 1),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon('assets/images/‌Bag - 3.png', 2),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon('assets/images/User.png', 3),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFFFF6838),
-        onTap: _onItemTapped,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: _buildIcon('assets/images/Discovery.png', 0),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon('assets/images/Star.png', 1),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon('assets/images/‌Bag - 3.png', 2),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon('assets/images/User.png', 3),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color(0xFFFF6838),
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }

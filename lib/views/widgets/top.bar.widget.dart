@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/repo/provider/liked.items.provider.dart';
 
@@ -24,8 +25,8 @@ class _TopBarState extends ConsumerState<TopBar> {
     print('Items are $likedItems and $isLiked');
 
     return Positioned(
-      top: 52,
-      left: 30,
+      top: 52.h,
+      left: 30.w,
       child: Row(
         children: [
           InkWell(
@@ -33,20 +34,20 @@ class _TopBarState extends ConsumerState<TopBar> {
               Navigator.pop(context);
             },
             child: Container(
-              height: 55,
-              width: 55,
+              height: 55.h,
+              width: 55.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
+                borderRadius: BorderRadius.circular(19.r),
                 color: Colors.white,
               ),
               child: Image.asset(
                 'assets/images/Vector (5).png',
-                width: 12,
+                width: 12.w,
               ),
             ),
           ),
-          const SizedBox(width: 244),
+          SizedBox(width: 240.w),
           InkWell(
             onTap: () {
               setState(() {
@@ -54,18 +55,18 @@ class _TopBarState extends ConsumerState<TopBar> {
               });
             },
             child: Container(
-              height: 55,
-              width: 55,
+              height: 55.h,
+              width: 55.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
+                borderRadius: BorderRadius.circular(19.r),
                 color: Colors.white,
               ),
               child: Image.asset(
                 isLiked
                     ? 'assets/images/heart (3).png'
                     : 'assets/images/heart (2).png',
-                width: 24,
+                width: 24.w,
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/domain/models/brand.model.dart';
 import 'package:sushi/views/widgets/category.button.widget.dart';
@@ -96,9 +97,9 @@ class MealDetails extends StatelessWidget {
                           imagePath: 'assets/images/🛵.png',
                           text: 'Free',
                           isSelected: false,
-                          width: 100,
-                          height: 57,
-                          fntSize: 12,
+                          width: 92.w,
+                          fntSize: 12.sp,
+                          height: 57.h,
                           onTap: () {},
                         ),
                         const SizedBox(width: 24),
@@ -106,9 +107,9 @@ class MealDetails extends StatelessWidget {
                           imagePath: 'assets/images/⏰.png',
                           text: '10-20 min',
                           isSelected: false,
-                          fntSize: 12,
-                          width: 100,
-                          height: 57,
+                          width: 98.w,
+                          fntSize: 12.sp,
+                          height: 57.h,
                           onTap: () {},
                         ),
                         const SizedBox(width: 24),
@@ -116,28 +117,28 @@ class MealDetails extends StatelessWidget {
                           imagePath: 'assets/images/Vector (4).png',
                           text: item.reviews.toString(),
                           isSelected: false,
-                          width: 100,
-                          fntSize: 12,
-                          height: 57,
+                          width: 92.w,
+                          fntSize: 12.sp,
+                          height: 57.h,
                           onTap: () {},
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         'Ingredients',
                         style: GoogleFonts.playfairDisplay(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -152,33 +153,33 @@ class MealDetails extends StatelessWidget {
                           .toList(),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         'About',
                         style: GoogleFonts.playfairDisplay(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   SizedBox(
-                    width: 380,
+                    width: 380.w,
                     child: Text(
                       description,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: 16.sp,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                      height:
-                          100), // Added space to avoid overlap with Positioned widget
+                  SizedBox(
+                      height: 100
+                          .h), // Added space to avoid overlap with Positioned widget
                 ],
               ),
             ),
@@ -189,27 +190,6 @@ class MealDetails extends StatelessWidget {
             item: item,
           ),
 
-          // Positioned(
-          //   bottom: 40,
-          //   left: 40,
-          //   height: 70,
-          //   width: 354,
-          //   child: Container(
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(25),
-          //       color: const Color(0xFFFF6838),
-          //     ),
-          //     child: const Text(
-          //       r'Add to Cart ($15.98)',
-          //       style: TextStyle(
-          //         fontSize: 20,
-          //         fontWeight: FontWeight.w900,
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           TopBar(
             item: item,
           ), // Ensure TopBar is added last in the Stack

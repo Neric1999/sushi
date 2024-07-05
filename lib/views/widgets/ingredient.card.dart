@@ -21,7 +21,7 @@ class IngredientCard extends StatelessWidget {
       shadowColor: const Color.fromARGB(255, 255, 47, 0),
       child: Container(
         alignment: Alignment.center,
-        height: 130,
+        height: 130.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           color: const Color.fromARGB(255, 250, 250, 250),
@@ -30,8 +30,8 @@ class IngredientCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 60,
-              width: 65,
+              height: 60.h,
+              width: 65.w,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.r),
@@ -41,14 +41,14 @@ class IngredientCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             SizedBox(
-              width: 80,
+              width: 80.w,
               child: Text(
                 text,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 14,
+                style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
